@@ -34,7 +34,7 @@ function App() {
       <h1 className='rojo'>Hola mundo!</h1>
 
       <ProyectarContenido2
-          parteSuperior={<h3>Esta es la parte de arriba</h3>}
+          parteSuperior={<span>Este es un mensaje del componente padre </span>}
           parteIntermedia={parteIntermedia}
           parteInferior = {parteInferior}
         />
