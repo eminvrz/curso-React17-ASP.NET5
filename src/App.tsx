@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import ContenidoDinamico from './componentes/ContenidoDinamico'
 import EjemploReloj from './componentes/EjemploReloj'
 import MostrarTexto from './componentes/MostrarTexto'
-import ProyectarContenido2 from './componentes/ProyectarContenido2'
 
 function App() {
 
@@ -33,11 +33,13 @@ function App() {
     <div>
       <h1 className='rojo'>Hola mundo!</h1>
 
-      <ProyectarContenido2
+        <ContenidoDinamico calificacion = { 90 }/>
+
+      {/* <ProyectarContenido2
           parteSuperior={<span>Este es un mensaje del componente padre </span>}
           parteIntermedia={parteIntermedia}
           parteInferior = {parteInferior}
-        />
+        /> */}
 
 
       {/* Importamos el componente Proyc... Para visualizarlo en su propio componente, es decir estamos enviando contenido como parametro a nuestro componente */}
