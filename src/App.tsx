@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
-import ContenidoDinamico from './componentes/ContenidoDinamico'
+// import ContenidoDinamico from './componentes/ContenidoDinamico'
+import EjemploUseEffect from './componentes/EjemploUseEffect'
 import FormularioTexto from './componentes/FormularioTexto'
 import MostrarTexto from './componentes/MostrarTexto'
 
@@ -13,7 +14,7 @@ function App() {
   
   const [texto, setTexto] = useState('Valor por defecto');
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const manejarKeyUp = (textoInput: string) => {
     console.log(textoInput)
@@ -29,17 +30,26 @@ function App() {
 
     // const parteInferior = <div style={estilo }></div>
 
-    const calificaciones = [
-      {nombre: 'Felipe', calificacion: 75},
-      {nombre: 'Emiliano', calificacion: 90},
-      {nombre: 'Claudia', calificacion: 100 },
-    ]
+    // const calificaciones = [
+    //   {nombre: 'Felipe', calificacion: 75},
+    //   {nombre: 'Emiliano', calificacion: 90},
+    //   {nombre: 'Claudia', calificacion: 100 },
+    // ]
 
   return(
     <div>
       <h1 className='rojo'>Hola mundo!</h1>
 
-        {calificaciones.map(cal => <ContenidoDinamico key={cal.nombre} {...cal}  />)}
+      <div>
+        <input type="checkbox" 
+        onChange={(e) => setChecked(e.currentTarget.checked)}
+        checked= {checked} /> Mostrar componente useEffect
+      </div>
+
+        {checked ?  <EjemploUseEffect /> : null }
+
+          <br />
+        {/* {calificaciones.map(cal => <ContenidoDinamico key={cal.nombre} {...cal}  />)} */}
 
       {/* <ProyectarContenido2
           parteSuperior={<span>Este es un mensaje del componente padre </span>}
