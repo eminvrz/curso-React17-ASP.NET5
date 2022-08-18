@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import ContenidoDinamico from './componentes/ContenidoDinamico'
-import EjemploReloj from './componentes/EjemploReloj'
+import FormularioTexto from './componentes/FormularioTexto'
 import MostrarTexto from './componentes/MostrarTexto'
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
 
   const [checked, setChecked] = useState(false);
 
-  const manejarKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value)
-    setTexto(e.currentTarget.value);
+  const manejarKeyUp = (textoInput: string) => {
+    console.log(textoInput)
+    setTexto(textoInput);
 
   }
 
@@ -61,9 +61,7 @@ function App() {
       onMouseEnter={() => console.log('entrando')}
       onClick={() => console.log('click desde el boton')}>Clickeame</button>
 <br />
-      <input type="text" 
-        onKeyUp={(e) => manejarKeyUp(e)}
-      />
+      <FormularioTexto manejarKeyUp={(e: string) => manejarKeyUp(e)}/>
 
       {/* traer funciones fuera de de este componente */}
       <MostrarTexto texto= {texto}/>
