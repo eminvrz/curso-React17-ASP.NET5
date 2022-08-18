@@ -6,10 +6,10 @@ import MostrarTexto from './componentes/MostrarTexto'
 
 function App() {
 
-  const imagenURL= "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg";
+  // const imagenURL= "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg";
 
 
-  const manejarClick = () => console.log('click');
+  // const manejarClick = () => console.log('click');
   
   const [texto, setTexto] = useState('Valor por defecto');
 
@@ -21,19 +21,25 @@ function App() {
 
   }
 
-    const parteIntermedia = <EjemploReloj/>
+    // const parteIntermedia = <EjemploReloj/>
 
-    const estilo = {
-      backgroundColor: 'red', width: '50px', height: '50px', marginLeft: '1rem'
-    }
+    // const estilo = {
+    //   backgroundColor: 'red', width: '50px', height: '50px', marginLeft: '1rem'
+    // }
 
-    const parteInferior = <div style={estilo }></div>
+    // const parteInferior = <div style={estilo }></div>
+
+    const calificaciones = [
+      {nombre: 'Felipe', calificacion: 75},
+      {nombre: 'Emiliano', calificacion: 90},
+      {nombre: 'Claudia', calificacion: 100 },
+    ]
 
   return(
     <div>
       <h1 className='rojo'>Hola mundo!</h1>
 
-        <ContenidoDinamico calificacion = { 90 }/>
+        {calificaciones.map(cal => <ContenidoDinamico key={cal.nombre} {...cal}  />)}
 
       {/* <ProyectarContenido2
           parteSuperior={<span>Este es un mensaje del componente padre </span>}
