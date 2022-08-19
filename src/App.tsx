@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import Abuelo from './componentes/Abuelo'
 // import ContenidoDinamico from './componentes/ContenidoDinamico'
 import EjemploUseEffect from './componentes/EjemploUseEffect'
 import FormularioTexto from './componentes/FormularioTexto'
 import MostrarTexto from './componentes/MostrarTexto'
+import ValorContext from './componentes/ValorContext'
 
 function App() {
 
@@ -39,6 +41,10 @@ function App() {
   return(
     <div>
       <h1 className='rojo'>Hola mundo!</h1>
+
+      <ValorContext.Provider value ={texto}>
+        <Abuelo />
+      </ValorContext.Provider>
 
       <div>
         <input type="checkbox" 
