@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
-import Abuelo from './componentes/Abuelo'
-// import ContenidoDinamico from './componentes/ContenidoDinamico'
-import EjemploUseEffect from './componentes/EjemploUseEffect'
+import ContenidoDinamico from './componentes/ContenidoDinamico'
 import FormularioTexto from './componentes/FormularioTexto'
 import MostrarTexto from './componentes/MostrarTexto'
-import ValorContext from './componentes/ValorContext'
+import ErrorBoundary from './componentesClases/ErrorBoundary'
 
 function App() {
 
@@ -32,17 +30,23 @@ function App() {
 
     // const parteInferior = <div style={estilo }></div>
 
-    // const calificaciones = [
-    //   {nombre: 'Felipe', calificacion: 75},
-    //   {nombre: 'Emiliano', calificacion: 90},
-    //   {nombre: 'Claudia', calificacion: 100 },
-    // ]
+    const calificaciones = [
+      {nombre: 'Felipe', calificacion: 75},
+      {nombre: 'Emiliano', calificacion: -1},
+      {nombre: 'Claudia', calificacion: 95 },
+    ]
 
   return(
     <div>
       <h1 className='rojo'>Hola mundo!</h1>
+      
+      {calificaciones.map(cal => 
+      <ErrorBoundary key={cal.nombre}>
+      <ContenidoDinamico  {...cal}  />
+      </ErrorBoundary>
+      )}
 
-      <ValorContext.Provider value ={texto}>
+      {/* <ValorContext.Provider value ={texto}>
         <Abuelo />
       </ValorContext.Provider>
 
@@ -52,10 +56,11 @@ function App() {
         checked= {checked} /> Mostrar componente useEffect
       </div>
 
-        {checked ?  <EjemploUseEffect /> : null }
+        {checked ?  <EjemploUseEffect /> : null } */}
 
           <br />
-        {/* {calificaciones.map(cal => <ContenidoDinamico key={cal.nombre} {...cal}  />)} */}
+
+
 
       {/* <ProyectarContenido2
           parteSuperior={<span>Este es un mensaje del componente padre </span>}
