@@ -20,10 +20,10 @@ function App() {
         }, 
       ],
     proximosEstrenos: [
-      // {id: 3, titulo: 'Soul',
-      // poster: 'https://lumiere-a.akamaihd.net/v1/images/image_5e27f8d3.jpeg?region=0,0,648,972'}
+      {id: 3, titulo: 'Soul',
+      poster: 'https://lumiere-a.akamaihd.net/v1/images/image_5e27f8d3.jpeg?region=0,0,648,972'}
     ]}) 
-    }, 3000);
+    }, 500);
 
     return () => clearTimeout(timerId);
   })
