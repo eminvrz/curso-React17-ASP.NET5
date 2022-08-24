@@ -1,25 +1,49 @@
+import { useEffect, useState } from 'react'
 import './App.css'
-import { pelicula } from './Peliculas/peliculas.model'
-import PeliculaIndividual from './Peliculas/peliculaIndividual'
 import ListadoPeliculas from './Peliculas/listadoPeliculas'
+import { landingPageDTO } from './Peliculas/peliculas.model'
 
 function App() {
 
-  const peliculasEnCartelera: pelicula[] = [
-    {
-      id: 1, titulo: 'Spider-Man: Far from Home',
-      poster: 'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/950/public/media/image/2019/01/qDz9iemTMUENJnhakF1KPwLO2dl.jpg?itok=BJE8MyqO'
-    }, 
-    {
-      id: 2, titulo: 'Moana',
-      poster: 'https://images-na.ssl-images-amazon.com/images/S/pv-target-images/aaab47a0da6fc54f0a304f891b1638a19b9ccdefb69a00f10329a70b9b70cc08._RI_V_TTW_.jpg'
-    }, 
-  ]
+  const [peliculas, setPeliculas] = useState<landingPageDTO>({})
 
-  const peliculasProximosEstrenos: pelicula[] = [
-    {id: 3, titulo: 'Soul',
-    poster: 'https://lumiere-a.akamaihd.net/v1/images/image_5e27f8d3.jpeg?region=0,0,648,972'}
-  ]
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setPeliculas({enCartelera: [
+        {
+          id: 1, titulo: 'Spider-Man: Far from Home',
+          poster: 'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/950/public/media/image/2019/01/qDz9iemTMUENJnhakF1KPwLO2dl.jpg?itok=BJE8MyqO'
+        }, 
+        {
+          id: 2, titulo: 'Moana',
+          poster: 'https://images-na.ssl-images-amazon.com/images/S/pv-target-images/aaab47a0da6fc54f0a304f891b1638a19b9ccdefb69a00f10329a70b9b70cc08._RI_V_TTW_.jpg'
+        }, 
+      ],
+    proximosEstrenos: [
+      // {id: 3, titulo: 'Soul',
+      // poster: 'https://lumiere-a.akamaihd.net/v1/images/image_5e27f8d3.jpeg?region=0,0,648,972'}
+    ]}) 
+    }, 3000);
+
+    return () => clearTimeout(timerId);
+  })
+
+
+  // const peliculasEnCartelera: pelicula[] = [
+  //   {
+  //     id: 1, titulo: 'Spider-Man: Far from Home',
+  //     poster: 'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/950/public/media/image/2019/01/qDz9iemTMUENJnhakF1KPwLO2dl.jpg?itok=BJE8MyqO'
+  //   }, 
+  //   {
+  //     id: 2, titulo: 'Moana',
+  //     poster: 'https://images-na.ssl-images-amazon.com/images/S/pv-target-images/aaab47a0da6fc54f0a304f891b1638a19b9ccdefb69a00f10329a70b9b70cc08._RI_V_TTW_.jpg'
+  //   }, 
+  // ]
+
+  // const peliculasProximosEstrenos: pelicula[] = [
+  //   {id: 3, titulo: 'Soul',
+  //   poster: 'https://lumiere-a.akamaihd.net/v1/images/image_5e27f8d3.jpeg?region=0,0,648,972'}
+  // ]
 
   // const peliculaPrueba: pelicula = {
   //   id: 1, titulo: 'Spider-Man: Far from Home',
@@ -29,10 +53,10 @@ function App() {
   return(
     <>
     <h3>En cartelera</h3>
-    <ListadoPeliculas peliculas = {peliculasEnCartelera}/>
+    <ListadoPeliculas peliculas = {peliculas.enCartelera}/>
 
     <h3>Proximos Estrenos</h3>
-    <ListadoPeliculas peliculas = {peliculasProximosEstrenos}/>
+    <ListadoPeliculas peliculas = {peliculas.proximosEstrenos}/>
     </>
   );
 
