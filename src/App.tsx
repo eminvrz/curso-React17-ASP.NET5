@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css'
-import IndiceGeneros from './generos/indiceGeneros'
-import LandingPage from './Peliculas/LandingPage'
+import rutas from './Peliculas/router-config'
 import Menu from './utils/Menu'
 
 function App() {
@@ -12,13 +11,11 @@ function App() {
         <Menu />
         <div className="container">
           <Switch>
-            <Route exact path="/">
-             <LandingPage/>
-            </Route>
-
-            <Route path="/generos">
-              <IndiceGeneros />
-            </Route>
+            //* Importando rutas, siempre se usara un map 
+            {rutas.map(ruta =>
+              <Route key={ruta.path} path={ruta.path}
+                exact={ruta.exact}><ruta.componente />
+              </Route>)}
           </Switch>
         </div>
       </BrowserRouter>
