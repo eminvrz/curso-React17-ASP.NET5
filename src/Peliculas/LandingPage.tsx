@@ -33,7 +33,6 @@ function LandingPage() {
 
     return (
         <>
-
             <h3>En Cartelera</h3>
             <ListadoPeliculas peliculas={peliculas.enCartelera} />
 

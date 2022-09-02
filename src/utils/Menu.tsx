@@ -1,14 +1,23 @@
+import { NavLink } from "react-router-dom"
+
 function Menu() {
+
+    // Nav link para impedir hacer un full refresh 
+    const claseActiva = "active";
+
     return ( 
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <a href="/" className="navbar-brand"> React Peliculas</a>
+                <NavLink to="/" className="navbar-brand"
+                activeClassName={claseActiva}
+                > React Peliculas</NavLink>
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link" href="/generos">
+                            <NavLink className="nav-link" activeClassName={claseActiva}
+                            to="/generos">
                                 Generos 
-                            </a>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
