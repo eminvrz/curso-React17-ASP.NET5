@@ -11,6 +11,7 @@ import editarCines from "../Cines/editarCines"
 import crearPeliculas from "./crearPeliculas"
 import editarPeliculas from './editarPeliculas'
 import filtroPeliculas from "./filtroPeliculas"
+import RedireccionarALanding from "../utils/RedireccionarALanding"
 
 const rutas  = [
     {path: '/generos/crear', componente: crearGenero},
@@ -29,7 +30,8 @@ const rutas  = [
     {path: '/peliculas/editar/:id(\\d+)', componente: editarPeliculas},
     {path: '/peliculas/filtrar', componente: filtroPeliculas},
 
-    {path: '/', componente: LandingPage, exact: true,}
+    {path: '/', componente: LandingPage, exact: true,},
+    {path: '*', componente: RedireccionarALanding}
 ];
 
 export default rutas;
