@@ -13,10 +13,39 @@ function Menu() {
                 > React Peliculas</NavLink>
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+
                         <li className="nav-item">
                             <NavLink className="nav-link" activeClassName={claseActiva}
                             to="/generos">
                                 Generos 
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName={claseActiva}
+                            to="/peliculas/filtrar">
+                                Filtrar Peliculas 
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName={claseActiva}
+                            to="/actores">
+                                Actores 
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName={claseActiva}
+                            to="/cines">
+                                Cines
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName={claseActiva}
+                            to="/peliculas/crear">
+                                Crear Peliculas
                             </NavLink>
                         </li>
                     </ul>
