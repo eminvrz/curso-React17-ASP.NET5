@@ -14,19 +14,19 @@ import filtroPeliculas from "./filtroPeliculas"
 
 const rutas  = [
     {path: '/generos/crear', componente: crearGenero},
-    {path: '/generos/editar', componente: editarGenero},
-    {path: '/generos', componente: IndiceGeneros},
+    {path: '/generos/editar/:id(\\d+)', componente: editarGenero},
+    {path: '/generos', componente: IndiceGeneros, exact: true},
 
     {path: '/actores/crear', componente: crearActores},
-    {path: '/actores/editar', componente: editarActores},
-    {path: '/actores', componente: indiceActores},
+    {path: '/actores/editar/:id(\\d+)', componente: editarActores},
+    {path: '/actores', componente: indiceActores, exact: true},
 
     {path: '/cines/crear', componente: crearCines},
-    {path: '/cines/editar', componente: editarCines},
-    {path: '/cines', componente: indiceCines},
+    {path: '/cines/editar/:id(\\d+)', componente: editarCines},
+    {path: '/cines', componente: indiceCines, exact: true},
 
     {path: '/peliculas/crear', componente: crearPeliculas},
-    {path: '/peliculas/editar', componente: editarPeliculas},
+    {path: '/peliculas/editar/:id(\\d+)', componente: editarPeliculas},
     {path: '/peliculas/filtrar', componente: filtroPeliculas},
 
     {path: '/', componente: LandingPage, exact: true,}

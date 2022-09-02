@@ -1,7 +1,15 @@
-function editarGenero() {
+import { useParams } from "react-router-dom"
+
+function EditarGenero() {
+
+    const {id}: any = useParams();
+
     return ( 
-        <>Editar Genero</>
+        <>
+         <h3>Editar Genero</h3>
+         <h4>El id es {id}</h4>
+        </>
      );
 }
 
-export default editarGenero;
+export default EditarGenero;
