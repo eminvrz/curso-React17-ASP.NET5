@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import FormularioGeneros from "./FormularioGenero"
 
 function EditarGenero() {
 
@@ -7,7 +8,12 @@ function EditarGenero() {
     return ( 
         <>
          <h3>Editar Genero</h3>
-         <h4>El id es {id}</h4>
+         <FormularioGeneros modelo={{nombre: 'Accion'}}
+                onSubmit={ async (valores, acciones)  => {
+                    await new Promise(r => setTimeout(r, 3000));
+                    console.log(valores);
+                }}
+            />
         </>
      );
 }
