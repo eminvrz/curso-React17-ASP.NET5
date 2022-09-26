@@ -14,25 +14,28 @@ function CrearGenero() {
             <h3>Crear Genero</h3>
 
             <Formik initialValues={{
-                nombre: 'nombre' // palabra por defecto
+                nombre: '' // palabra por defecto
             }}
-                onSubmit={values => {
+                onSubmit={async values => {
+                    await new Promise(r => setTimeout(r, 300));
                     console.log(values)
                 }}
 
                 validationSchema={Yup.object({
-                    nombre: Yup.string().required('Este campo es requerido')
+                    nombre: Yup.string().required('Este campo es requerido').primeraLetraMayuscula()
                 })}
             >
 
-
-
-                <Form>
+                {(formikProps) => (
+                    <Form>
                     <FormGroupText campo="nombre" label="Nombre" placeholder="Nombre del genero"/>
 
-                    <Button type="submit">Salvar</Button>
+                    <Button disabled={formikProps.isSubmitting} 
+                    type="submit">Salvar</Button>
                     <Link className="btn btn-secondary" to="/generos">Cancelar</Link>
                 </Form>
+                )}
+                
             </Formik>
 
         </>
