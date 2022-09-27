@@ -67,7 +67,7 @@ function filtroPeliculas() {
                             <Button className="btn btn-primary mb-2 mx-sm-3" onClick={() => formikProps.submitForm()}>
                                 Filtrar
                             </Button>
-                            <Button className="btn- btn-danger mb-2" onClick={() => formikProps.setValues(valorInicial)}>
+                            <Button className="btn btn-danger mb-2" onClick={() => formikProps.setValues(valorInicial)}>
                                 Limpiar
                             </Button>
                         </div>

@@ -1,11 +1,12 @@
-import { actorCreacionDTO } from "./actores.model"
 import { Form, Formik, FormikHelpers } from 'formik'
-import FormGroupText from '../utils/FormGroupText'
-import Button from '../utils/Button'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
+import Button from '../utils/Button'
 import FormGroupFecha from "../utils/FormGroupFecha"
 import FormGroupimagen from '../utils/FormGroupimagen'
+import FormGroupMarkdown from "../utils/FormGroupMarkdown"
+import FormGroupText from '../utils/FormGroupText'
+import { actorCreacionDTO } from "./actores.model"
 
 function FormularioActores(props: FormularioActoresProps) {
     return ( 
@@ -22,6 +23,7 @@ function FormularioActores(props: FormularioActoresProps) {
                     <FormGroupText campo="nombre" label="Nombre"/>
                     <FormGroupFecha label="Fecha Nacimiento" campo="fechaNacimiento"/>
                     <FormGroupimagen campo="foto" label="Foto" imagenURL={props.modelo.fotoURL}/>
+                    <FormGroupMarkdown campo="biografia" label="Biografia"/>
 
                     <Button disabled = {formikProps.isSubmitting} type="submit">
                         Salvar
