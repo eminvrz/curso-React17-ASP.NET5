@@ -1,5 +1,6 @@
 import FormularioPeliculas from "./FormularioPeliculas"
 import { generoDTO } from '../Generos/Generos.model'
+import { cineDTO } from '../Cines/cines.model'
 
 function crearPeliculas() {
 
@@ -9,11 +10,15 @@ function crearPeliculas() {
         {id: 3, nombre: 'Comedia'}
     ] 
 
+    const cines: cineDTO[] = [{id: 1, nombre: 'Agora'}, {id: 2, nombre: 'Sambil'}]
+
     return ( 
         <>
             <h3>Crear Peliculas</h3>
 
             <FormularioPeliculas 
+            cinesSeleccionados={cines}
+            cinesNoSeleccionados={[]}
             generosNoSeleccionados={generos}
             generosSeleccionados={[]}
             modelo={{titulo: '', enCines:false, trailer:''}}
