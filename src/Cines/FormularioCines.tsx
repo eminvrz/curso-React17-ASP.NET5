@@ -1,9 +1,10 @@
-import { cineCreacionDTO } from './cines.model'
 import { Form, Formik, FormikHelpers } from 'formik'
-import * as Yup from 'yup'
-import FormGroupText from '../utils/FormGroupText'
-import Button from '../utils/Button'
 import { Link } from 'react-router-dom'
+import * as Yup from 'yup'
+import Button from '../utils/Button'
+import FormGroupText from '../utils/FormGroupText'
+import Mapa from '../utils/Mapa'
+import { cineCreacionDTO } from './cines.model'
 
 
 function FormularioCines(props: formularioCinesProps) {
@@ -15,6 +16,11 @@ function FormularioCines(props: formularioCinesProps) {
             {(formikProps) => (
                 <Form>
                     <FormGroupText label='Nombre' campo='nombre'/>
+
+                    <div style={{marginBottom: '1rem'}}>
+                        <Mapa />
+                    </div>
+
                     <Button disabled={formikProps.isSubmitting} type="submit">Salvar</Button>
                     <Link className="btn btn-secondary" to="/cines">Cancelar</Link>
                 </Form>
