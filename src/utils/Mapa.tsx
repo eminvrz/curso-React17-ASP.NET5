@@ -17,7 +17,7 @@ const position = [30.624620, -110.974596];
 
 function Mapa(props: MapaProps) {
 
-    const [coordenadas, setCoordenadas] = useState<coordenadaDTO[]>([])
+    const [coordenadas, setCoordenadas] = useState<coordenadaDTO[]>(props.coordenadas)
 
     return ( 
         <MapContainer center={[30.624620, -110.974596]} zoom={14} style={{height: props.height}}>
@@ -26,6 +26,7 @@ function Mapa(props: MapaProps) {
             
             <ClickMapa setPunto={coordenadas => {
                 setCoordenadas([coordenadas])
+                props.manejarClickMapa(coordenadas);
             }}/>
             {coordenadas.map(coordenadas => <Marcador key={coordenadas.lat + coordenadas.lng}
                 {...coordenadas}
@@ -53,6 +54,8 @@ function Marcador(props: coordenadaDTO){
 
 interface MapaProps{
     height: string;
+    coordenadas: coordenadaDTO[];
+    manejarClickMapa(coordenadas: coordenadaDTO): void;
 
 }
 

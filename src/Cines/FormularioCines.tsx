@@ -2,12 +2,24 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import Button from '../utils/Button'
+import { coordenadaDTO } from '../utils/coordenadas.model'
 import FormGroupText from '../utils/FormGroupText'
-import Mapa from '../utils/Mapa'
+import MapaFormulario from '../utils/MapaFormulario'
 import { cineCreacionDTO } from './cines.model'
 
 
 function FormularioCines(props: formularioCinesProps) {
+
+function transformarCoordenada(): coordenadaDTO[] | undefined {
+    if(props.modelo.latitud && props.modelo.longitud){
+        const respuesta: coordenadaDTO = {
+            lat: props.modelo.latitud, 
+            lng: props.modelo.longitud
+        }
+        return [respuesta];
+    }
+    return undefined;
+}
     return ( 
         <Formik initialValues={props.modelo} onSubmit={props.onSubmit} validationSchema={Yup.object({
             nombre: Yup.string().required('Este campo es requerido').primeraLetraMayuscula()
@@ -18,7 +30,9 @@ function FormularioCines(props: formularioCinesProps) {
                     <FormGroupText label='Nombre' campo='nombre'/>
 
                     <div style={{marginBottom: '1rem'}}>
-                        <Mapa />
+                        <MapaFormulario campoLat='latitud' campoLng='longitud'
+                            coordenadas={transformarCoordenada()}
+                        />
                     </div>
 
                     <Button disabled={formikProps.isSubmitting} type="submit">Salvar</Button>
