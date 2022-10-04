@@ -12,6 +12,7 @@ import FormGroupimagen from '../utils/FormGroupimagen'
 import FormGroupText from '../utils/FormGroupText'
 import SelectorMultiple, { selectorMultipleModel } from '../utils/SelectorMultiple'
 import { peliculasCreacionDTO } from './peliculas.model'
+import { actorPeliculaDTO } from '../Actores/actores.model'
 function FormularioPeliculas(props: formularioPeliculasProps) {
 
     const [generosSeleccionados, setGenerosSeleccionados] = 
@@ -25,6 +26,8 @@ function FormularioPeliculas(props: formularioPeliculasProps) {
 
     const [cinesNoSeleccionados, setCinesNoSeleccionados] = 
     useState(mapear(props.cinesNoSeleccionados));
+
+    const [actoresSeleccionados, setActoresSeleccionados] = useState<actorPeliculaDTO[]>([])
 
     function mapear( arreglo: {id: number, nombre: string}[]): selectorMultipleModel[]{
         return arreglo.map(valor => {
@@ -74,7 +77,29 @@ function FormularioPeliculas(props: formularioPeliculasProps) {
 
                     <div className='form-group'>
                             <TypeAheadActores 
-                                actores={[]} // arreglo vacio
+                                onAdd={actores => {
+                                    setActoresSeleccionados(actores);
+                                }}
+                                onRemove={actor => {
+                                    const actores = actoresSeleccionados.filter(x => x !== actor);
+                                    setActoresSeleccionados(actores);
+                                }}
+                                actores={actoresSeleccionados} // arreglo vacio
+                                listadoUI={
+                                    (actor: actorPeliculaDTO) => <>
+                                        {actor.nombre} / 
+                                        <input placeholder='Personaje' 
+                                               type="text" 
+                                               value={actor.personaje} 
+                                               onChange={e => {
+                                                    const indice = actoresSeleccionados.findIndex(x => x.id === actor.id);
+                                                    const actores = [...actoresSeleccionados];
+                                                    actores[indice].personaje = e.currentTarget.value;
+                                                    setActoresSeleccionados(actores);
+                                            }}
+                                        />
+                                    </> 
+                                }
                             />
                     </div>
 

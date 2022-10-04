@@ -13,6 +13,10 @@ form > a{
     margin-left: 1rem; 
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 .rojo {
     color: red;
 }
