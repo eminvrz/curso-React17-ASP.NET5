@@ -1,17 +1,17 @@
-import { Formik, Form, FormikHelpers } from 'formik'
-import { peliculasCreacionDTO } from './peliculas.model'
+import { Form, Formik, FormikHelpers } from 'formik'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
-import FormGroupText from '../utils/FormGroupText'
+import TypeAheadActores from '../Actores/TypeAheadActores'
+import { cineDTO } from '../Cines/cines.model'
+import { generoDTO } from '../Generos/Generos.model'
+import Button from '../utils/Button'
 import FormGroupCheckbox from '../utils/FormGroupCheckbox'
 import FormGroupFecha from '../utils/FormGroupFecha'
 import FormGroupimagen from '../utils/FormGroupimagen'
-import Button from '../utils/Button'
-import { Link } from 'react-router-dom'
-import SelectorMultiple from '../utils/SelectorMultiple'
-import { generoDTO, generoCreacionDTO } from '../Generos/Generos.model'
-import { useState } from 'react'
-import { selectorMultipleModel } from '../utils/SelectorMultiple'
-import { cineDTO } from '../Cines/cines.model'
+import FormGroupText from '../utils/FormGroupText'
+import SelectorMultiple, { selectorMultipleModel } from '../utils/SelectorMultiple'
+import { peliculasCreacionDTO } from './peliculas.model'
 function FormularioPeliculas(props: formularioPeliculasProps) {
 
     const [generosSeleccionados, setGenerosSeleccionados] = 
@@ -70,6 +70,12 @@ function FormularioPeliculas(props: formularioPeliculasProps) {
                                 setCinesSeleccionados(seleccionados)
                                 setCinesNoSeleccionados(noSeleccionados)}}
                         />
+                    </div>
+
+                    <div className='form-group'>
+                            <TypeAheadActores 
+                                actores={[]} // arreglo vacio
+                            />
                     </div>
 
                     <Button disabled={formikProps.isSubmitting} type='submit'>Enviar</Button>
