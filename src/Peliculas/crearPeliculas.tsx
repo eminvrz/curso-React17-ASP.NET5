@@ -17,6 +17,7 @@ function crearPeliculas() {
             <h3>Crear Peliculas</h3>
 
             <FormularioPeliculas 
+            actoresSeleccionados={[]}
             cinesSeleccionados={cines}
             cinesNoSeleccionados={[]}
             generosNoSeleccionados={generos}
