@@ -24,3 +24,7 @@ form > a{
 .color {
     color: blue;
 }
+
+.table a{
+    margin-right: 1rem;
+}
