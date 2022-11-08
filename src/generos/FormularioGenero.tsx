@@ -1,8 +1,8 @@
-import { Formik, Form, FormikHelpers } from "formik"
+import { Form, Formik, FormikHelpers } from "formik"
 import { Link } from "react-router-dom"
+import * as Yup from 'yup'
 import Button from "../utils/Button"
 import FormGroupText from "../utils/FormGroupText"
-import * as Yup from 'yup'
 import { generoCreacionDTO } from './Generos.model'
 
 function FormularioGeneros(props: FormularioGeneroProps) {
@@ -12,7 +12,9 @@ function FormularioGeneros(props: FormularioGeneroProps) {
             onSubmit={props.onSubmit}
 
             validationSchema={Yup.object({
-                nombre: Yup.string().required('Este campo es requerido').primeraLetraMayuscula()
+                nombre: Yup.string().required('Este campo es requerido')
+                .max(50, 'La longitud maxima es de 50 caracteres')
+                .primeraLetraMayuscula()
             })}
         >
 
