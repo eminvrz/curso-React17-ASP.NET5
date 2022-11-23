@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import Button from "../utils/Button"
+import confirmar from "../utils/Confirmar"
 import { urlGeneros } from "../utils/endPoints"
 import ListadoGenerico from "../utils/ListadoGenerico"
 import Paginacion from "../utils/Paginacion"
@@ -16,6 +17,11 @@ function IndiceGeneros() {
 
     useEffect( ()=> {
         // hacer una peticion http get hacia nuestro webapi con la libreria axios
+        cargarDatos();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pagina, recordsPorPagina])
+
+    function cargarDatos(){
         axios.get(urlGeneros, {
             params: {pagina, recordsPorPagina}
         })
@@ -26,7 +32,17 @@ function IndiceGeneros() {
                 console.log(respuesta.data);
                 setGeneros(respuesta.data);
             })
-    }, [pagina, recordsPorPagina])
+    }
+
+    async function borrar(id:number){
+
+        try{
+            await axios.delete(`${urlGeneros}/${id}`)
+            cargarDatos();
+        } catch(error){
+            console.log(error.response.data);
+        }
+    }
 
     return ( 
         <>
@@ -62,11 +78,13 @@ function IndiceGeneros() {
                         {generos?.map(generos => 
                         <tr key={generos.id}>
                             <td>
-                                <Link className="btn btn-success" to={`/generos/${generos.id}`}>
+                                <Link className="btn btn-success" to={`/generos/editar/${generos.id}`}>
                                    Editar 
                                 </Link>
 
-                                <Button className="btn btn-danger">Borrar</Button>
+                                <Button 
+                                onClick={() => confirmar(() => borrar(generos.id))}
+                                className="btn btn-danger">Borrar</Button>
                             </td>
                             <td>
                                 {generos.nombre}
