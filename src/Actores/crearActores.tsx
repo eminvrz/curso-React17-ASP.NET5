@@ -6,6 +6,7 @@ import { urlActores } from '../utils/endPoints'
 
 import MostrarErrores from '../utils/MostrarErrores'
 import { useHistory } from "react-router-dom"
+import { convertirActorAFormData } from "../utils/formDataUtils"
 
 
 
@@ -16,7 +17,14 @@ function CrearActores() {
 
     async function crear(actor:actorCreacionDTO) {
         try{
-            await axios.post(urlActores, actor);
+            const formData = convertirActorAFormData(actor);
+            await axios({
+                method: 'post',
+                url: urlActores,
+                data: formData,
+                headers: {'Content-Type': 'multipart/form-data'}
+
+            });
             history.push('/actores');
         }
         catch(error){
