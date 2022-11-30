@@ -1,9 +1,7 @@
 import axios, { AxiosResponse } from "axios"
-import { useState, useEffect, ReactElement } from 'react'
-import { useParams, useHistory } from "react-router-dom"
-import { generoDTO, generoCreacionDTO } from "../Generos/Generos.model"
+import { ReactElement, useEffect, useState } from 'react'
+import { useHistory, useParams } from "react-router-dom"
 import Cargando from "./Cargando"
-import { urlGeneros } from "./endPoints"
 import MostrarErrores from "./MostrarErrores"
 
 function EditarEntidad<TCreacion, TLectura>
@@ -23,8 +21,20 @@ function EditarEntidad<TCreacion, TLectura>
 
     async function editar(entidadEditar: TCreacion){
         try{
-            await axios.put(`${props.url}/${id}`, entidadEditar)
+            if(props.transformarFormData){
+                const formData = props.transformarFormData(entidadEditar);
+            await axios({
+                method: 'put',
+                url: `${props.url}/${id}`,
+                data: formData,
+                headers: {'Content-Type': 'multipart/form-data'}
+
+            });
+            }else{
+                await axios.put(`${props.url}/${id}`, entidadEditar)
+            }
             history.push(props.urlIndice);
+            
         } catch(error){
             setErrores(error.response.data);
         }
@@ -47,6 +57,7 @@ interface editarEntidadProps<TCreacion, TLectura>{
         entidad: TCreacion, 
         editar: (entidad: TCreacion) => void): ReactElement;
     transformar(entidad: TLectura): TCreacion;
+    transformarFormData?(modelo: TCreacion): FormData
 
 }
 
