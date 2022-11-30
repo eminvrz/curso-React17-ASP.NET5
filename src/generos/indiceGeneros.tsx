@@ -3,8 +3,7 @@ import IndiceEntidad from "../utils/IndiceEntidad"
 import { generoDTO } from "./Generos.model"
 
 function IndiceGeneros() {
-
-    return ( 
+     return ( 
         <>        
                 <IndiceEntidad<generoDTO>
                     url={urlGeneros}
@@ -18,8 +17,8 @@ function IndiceGeneros() {
                                 <th></th>
                                 <th>Nombre</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                         </thead>
+                         <tbody>
                             {generos?.map(generos => 
                             <tr key={generos.id}>
                                 <td>
@@ -29,7 +28,8 @@ function IndiceGeneros() {
                                     {generos.nombre}
                                 </td>
                             </tr>)}
-                        </tbody>
+                         </tbody>
+
                         </>}
                         
                 

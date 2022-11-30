@@ -7,7 +7,7 @@ function Paginacion(props: paginacionProps) {
     useEffect(() => {
         const paginaAnteriorHabilitada = props.paginaActual !== 1;
         const paginaAnterior = props.paginaActual - 1;
-        const links: modeloLink[] = []
+        const links: modeloLink[] = [];
 
         links.push({
             texto: 'Anterior', 
@@ -66,13 +66,13 @@ function Paginacion(props: paginacionProps) {
 
     return (
         <nav>
-            <ul className='pagination justify-content-center'>
+            <ul className="pagination justify-content-center">
                 {listadoLinks.map(link => <li key={link.texto} 
                     onClick={() => seleccionarPagina(link)}
 
                     className={`page-item cursor ${obtenerClase(link)}`}
                     >
-                        <span className='page-link'>{link.texto}</span>
+                        <span className="page-link">{link.texto}</span>
                 </li> )}
             </ul>
         </nav>

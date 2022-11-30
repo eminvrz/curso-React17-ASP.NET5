@@ -6,11 +6,11 @@ export default function confirmar(
     textoBotonConfirmar: string = 'Borrar'){
         Swal.fire({
             title: titulo,
+            confirmButtonText: textoBotonConfirmar,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor:'#3085d6',
-            cancelButtonColor: '#d33' ,
-            confirmButtonText: textoBotonConfirmar
+            cancelButtonColor: '#d33' 
         }).then(result => {
             if(result.isConfirmed){
                 onConfirm();

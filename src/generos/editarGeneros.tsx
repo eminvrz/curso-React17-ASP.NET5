@@ -13,7 +13,7 @@ function EditarGenero() {
                 nombreEntidad="Generos"
                 >
                     {(entidad, editar) => <FormularioGeneros modelo={entidad}
-                        onSubmit={ async (valores, acciones)  => {
+                        onSubmit={ async valores  => {
                         await editar(valores)
                     }}
                 /> }

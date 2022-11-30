@@ -11,7 +11,7 @@ function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
 
         const [entidades, setEntidades] = useState<T[]>();
         const [totalPaginas, setTotalPaginas] = useState(0);
-        const [recordsPorPagina, setRecordsPorPagina] = useState(5);
+        const [recordsPorPagina, setRecordsPorPagina] = useState(10);
         const [pagina, setPagina] = useState(1);
     
         useEffect( ()=> {
@@ -21,7 +21,7 @@ function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
         }, [pagina, recordsPorPagina])
     
         function cargarDatos(){
-            axios.get(urlGeneros, {
+            axios.get(props.url, {
                 params: {pagina, recordsPorPagina}
             })
                 .then((respuesta: AxiosResponse<T[]>) => {
@@ -54,15 +54,17 @@ function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
         <>
             <h3>{props.titulo}</h3>
             <Link className="btn btn-primary" to={props.urlCreacion}>
-                {props.nombreEntidad}
+                Crear {props.nombreEntidad}
             </Link>
 
             <div className="form-group" style={{width: '150px'}}>
                 <label>Registros por Pagina:</label>
-                <select defaultValue={10}
+                <select 
+                        className="form-control"
+                        defaultValue={10}
                         onChange={e => {
                         setPagina(1);
-                        setRecordsPorPagina(parseInt(e.currentTarget.value, 10))}} className="form-control">
+                        setRecordsPorPagina(parseInt(e.currentTarget.value, 10))}} >
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={25}>25</option>
@@ -76,7 +78,7 @@ function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
 
             <ListadoGenerico listado={entidades}>
 
-             <table className="table table-stripped">
+             <table className="table table-striped">
                     {props.children(entidades!, botones)}
              </table>
 
