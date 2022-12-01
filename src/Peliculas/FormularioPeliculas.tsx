@@ -13,6 +13,7 @@ import FormGroupText from '../utils/FormGroupText'
 import SelectorMultiple, { selectorMultipleModel } from '../utils/SelectorMultiple'
 import { peliculasCreacionDTO } from './peliculas.model'
 import { actorPeliculaDTO } from '../Actores/actores.model'
+import FormGroupMarkdown from '../utils/FormGroupMarkdown'
 function FormularioPeliculas(props: formularioPeliculasProps) {
 
     const [generosSeleccionados, setGenerosSeleccionados] = 
@@ -54,6 +55,7 @@ function FormularioPeliculas(props: formularioPeliculasProps) {
                     <FormGroupText label='Trailer' campo='trailer'/>
                     <FormGroupFecha label='Fecha Lanzamiento' campo='fechaLanzamiento' />
                     <FormGroupimagen label='Poster' campo='poster' imagenURL={props.modelo.posterURL}/>
+                    <FormGroupMarkdown campo="resumen" label="Resumen" />
 
                     <div className='form-group'>
                         <label>Generos:</label>
