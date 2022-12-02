@@ -15,7 +15,7 @@ import LandingPage from './LandingPage'
 
 const rutas  = [
     {path: '/generos/crear', componente: crearGenero},
-    {path: '/generos/editar/:id(d+)', componente: editarGenero},
+    {path: '/generos/editar/:id(\\d+)', componente: editarGenero},
     {path: '/generos', componente: IndiceGeneros, exact: true},
 
     {path: '/actores/crear', componente: crearActores},
@@ -30,7 +30,7 @@ const rutas  = [
     {path: '/peliculas/editar/:id(\\d+)', componente: editarPeliculas},
     {path: '/peliculas/filtrar', componente: filtroPeliculas},
 
-    {path: '/', componente: LandingPage, exact: true,},
+    {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
 ];
 
