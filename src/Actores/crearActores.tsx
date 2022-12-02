@@ -42,7 +42,7 @@ function CrearActores() {
                 onSubmit={async valores => await crear(valores)}/>  
         </>
         
-     );
+     )
 }
 
 export default CrearActores;

@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import { ReactElement, useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom"
 import Cargando from "./Cargando"
-import MostrarErrores from "./MostrarErrores"
+import MostrarErrores from '../utils/MostrarErrores'
 
 function EditarEntidad<TCreacion, TLectura>
     (props: editarEntidadProps<TCreacion, TLectura>) {
