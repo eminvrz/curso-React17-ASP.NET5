@@ -1,8 +1,11 @@
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Link, useParams } from 'react-router-dom'
 import Cargando from '../utils/Cargando'
+import { coordenadaDTO } from '../utils/coordenadas.model'
 import { urlPeliculas } from '../utils/endPoints'
+import Mapa from '../utils/Mapa'
 import { peliculaDTO } from './peliculas.model'
 function DetallePelicula() {
 
@@ -29,6 +32,17 @@ function DetallePelicula() {
         }
 
         return `https://www.youtube.com/embed/${video_id}`
+    }
+
+    function trasnformarCoordenada(): coordenadaDTO[]{
+        if(pelicula?.cines){
+            const coordenadas = pelicula.cines.map( cine => {
+                return {lat: cine.latitud, lng: cine.longitud, nombre: cine.nombre} as coordenadaDTO;
+            });
+            return coordenadas;
+        }
+
+        return [];
     }
 
     return ( 
@@ -65,6 +79,35 @@ function DetallePelicula() {
                         </iframe>
                         </div> : null}
                 </div>
+                {pelicula.resumen ? 
+                <div style={{marginTop: '1rem'}}>
+                    <h3>Resumen</h3>
+                    <div>
+                        <ReactMarkdown>{pelicula.resumen}</ReactMarkdown>
+                    </div>
+                </div> : null }
+
+
+                {pelicula.actores && pelicula.actores.length > 0 ? 
+                <div style={{marginTop: '1rem'}}>
+                    <h3>Actores</h3>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        {pelicula.actores?.map(actor => 
+                        <div key={actor.id} style={{marginBottom: '2px'}}>
+                            <img src={actor.foto} alt="foto" style={{width: '50px', verticalAlign:'middle'}}/>
+                            <span style={{display: 'inline-block', width: '200px', marginLeft: '1rem'}}>
+                                {actor.nombre}
+                            </span>
+                            <span style={{display: 'inline-block', width: '45px'}}>...</span>
+                            <span>{actor.personaje}</span>
+                        </div>)}
+                    </div>
+                </div> : null}
+                {pelicula.cines && pelicula.cines.length > 0 ? 
+                <div>
+                    <h2>Mostrandose en los siguientes cines </h2>
+                    <Mapa soloLectura={true} coordenadas={trasnformarCoordenada()}/>
+                </div> : null}
             </div>
         </div> : <Cargando />
      )
