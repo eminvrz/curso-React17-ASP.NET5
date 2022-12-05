@@ -1,9 +1,10 @@
-import { ReactElement } from 'react'
+import { CSSProperties } from 'react'
 function Button(props: buttonProps) {
     return ( 
         <button type={props.type} className={props.className}
         disabled={props.disabled}
         onClick={props.onClick}
+        style={props.style}
         >{props.children}</button>
      );
 }
@@ -13,13 +14,15 @@ interface buttonProps{
     onClick?(): void;
     type: "button" | "submit"
     disabled: boolean,
-    className: string;
+    className: string,
+    style: CSSProperties
 }
 
 Button.defaultProps ={
     type: "button",
     disabled: false,
-    className: 'btn btn-primary'
+    className: 'btn btn-primary',
+    style: null
 }
 
 export default Button;
