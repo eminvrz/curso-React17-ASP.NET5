@@ -1,5 +1,5 @@
 
-import { pelicula } from "./peliculas.model"
+import { peliculaDTO } from "./peliculas.model"
 import css from './peliculasIndividual.module.css'
 
 
@@ -20,7 +20,7 @@ function PeliculaIndividual(props: peliculaIndividualProps) {
 }
 
 interface peliculaIndividualProps{
-    pelicula: pelicula;
+    pelicula: peliculaDTO;
 }
 
 export default PeliculaIndividual;

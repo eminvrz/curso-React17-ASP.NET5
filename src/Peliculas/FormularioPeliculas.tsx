@@ -14,6 +14,7 @@ import SelectorMultiple, { selectorMultipleModel } from '../utils/SelectorMultip
 import { peliculasCreacionDTO } from './peliculas.model'
 import { actorPeliculaDTO } from '../Actores/actores.model'
 import FormGroupMarkdown from '../utils/FormGroupMarkdown'
+
 function FormularioPeliculas(props: formularioPeliculasProps) {
 
     const [generosSeleccionados, setGenerosSeleccionados] = 

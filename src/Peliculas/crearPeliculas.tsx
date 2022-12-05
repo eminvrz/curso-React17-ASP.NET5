@@ -53,8 +53,8 @@ function CrearPeliculas() {
             <MostrarErrores errores={errores}/>
             {cargado ? <FormularioPeliculas
             actoresSeleccionados={[]}
-            cinesSeleccionados={cinesNoSeleccionados}
-            cinesNoSeleccionados={[]}
+            cinesNoSeleccionados={cinesNoSeleccionados}
+            cinesSeleccionados={[]}
             generosNoSeleccionados={generosNoSeleccionados}
             generosSeleccionados={[]}
             modelo={{titulo: '', enCines:false, trailer:''}}
