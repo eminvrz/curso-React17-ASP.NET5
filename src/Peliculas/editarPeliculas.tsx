@@ -1,44 +1,69 @@
-import { generoDTO } from '../Generos/Generos.model'
+import axios, { AxiosResponse } from 'axios'
+import { useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import Cargando from '../utils/Cargando'
+import { urlPeliculas } from '../utils/endPoints'
+import { convertirPeliculaAFormData } from '../utils/formDataUtils'
+import MostrarErrores from '../utils/MostrarErrores'
 import FormularioPeliculas from './FormularioPeliculas'
-import { cineDTO } from '../Cines/cines.model'
-import { actorPeliculaDTO } from '../Actores/actores.model'
+import { peliculasCreacionDTO, peliculasPutGetDTO } from './peliculas.model'
 
-function editarPeliculas() {
+function EditarPeliculas() {
 
-    const generosNoSeleccionados: generoDTO[] = [
-        {id: 2, nombre: 'Drama'}, 
-    ];
-    const generosSeleccionados: generoDTO[] = [
-        {id: 1, nombre: 'Accion'}, 
-        {id: 3, nombre: 'Comedia'}
-    ] 
+   const [pelicula, setPelicula] = useState<peliculasCreacionDTO>();
+   const [peliculaPutGet, setPeliculaPutGet] = useState<peliculasPutGetDTO>();
+   const {id}: any = useParams();
+   const history = useHistory();
+   const [errores, setErrores] = useState<string[]>([]);
 
-    const cinesSeleccionados: cineDTO[] = [{id: 2, nombre: 'Sambil'}]
-    const cinesNoSeleccionados: cineDTO[] = [{id: 1, nombre: 'Agora'}]
+   useEffect(() => {
+        axios.get(`${urlPeliculas}/PutGet/${id}`)
+            .then((respuesta: AxiosResponse<peliculasPutGetDTO>) => {
+                const modelo: peliculasCreacionDTO = {
+                    titulo: respuesta.data.pelicula.titulo,
+                    enCines: respuesta.data.pelicula.enCines,
+                    trailer: respuesta.data.pelicula.trailer,
+                    posterURL: respuesta.data.pelicula.poster,
+                    resumen: respuesta.data.pelicula.resumen,
+                    fechaLanzamiento: new Date(respuesta.data.pelicula.fechaLanzamiento)
+                };
+                setPelicula(modelo);
+                setPeliculaPutGet(respuesta.data);
+            })
+   }, [id])
 
-    const actoresSeleccionados: actorPeliculaDTO[] = [
-        {
-            id: 1,
-            nombre: 'Felipe',
-            personaje: '',
-            foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/1200px-Tom_Holland_by_Gage_Skidmore.jpg'
-        },
-    ]
+   async function editar(peliculaEditar: peliculasCreacionDTO){
+        try{
+            const formData = convertirPeliculaAFormData(peliculaEditar);
+            await axios({
+                method: 'put',
+                url: `${urlPeliculas}/${id}`,
+                data: formData,
+                headers: {'Content-Type': 'multipart/form-data'}
+            });
+            history.push(`/pelicula/${id}`);
+        }
+        catch(error){
+            setErrores(error.response.data);
+        }
+   }
+
     return ( 
         <>
             <h3>Editar Peliculas</h3>
-
-            <FormularioPeliculas
-            actoresSeleccionados={actoresSeleccionados}
-            cinesSeleccionados={cinesSeleccionados} 
-            cinesNoSeleccionados={cinesNoSeleccionados} 
-            generosNoSeleccionados={generosNoSeleccionados}
-            generosSeleccionados={generosSeleccionados}
-            modelo={{titulo: 'SpiderMan', enCines:true, trailer:'url', fechaLanzamiento: new Date('2019-01-01T00:00:00')}}
-            onSubmit={valores => console.log(valores)} />
+            <MostrarErrores errores={errores}/>
+            {pelicula && peliculaPutGet ? <FormularioPeliculas
+            actoresSeleccionados={peliculaPutGet.actores}
+            cinesSeleccionados={peliculaPutGet.cinesSeleccionados} 
+            cinesNoSeleccionados={peliculaPutGet.cinesNoSeleccionados} 
+            generosNoSeleccionados={peliculaPutGet.generosNoSeleccionados}
+            generosSeleccionados={peliculaPutGet.generosSeleccionados}
+            modelo= {pelicula!}
+            onSubmit={async valores => await editar(valores)} /> : <Cargando/>}
+            
         </>
         
      );
 }
 
-export default editarPeliculas;
+export default EditarPeliculas;
