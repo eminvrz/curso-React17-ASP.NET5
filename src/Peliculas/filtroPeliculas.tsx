@@ -1,32 +1,52 @@
 import { Field, Form, Formik } from "formik"
 import { generoDTO } from '../Generos/Generos.model'
 import Button from "../utils/Button"
+import { useEffect, useState } from 'react'
+import { urlGeneros, urlPeliculas } from "../utils/endPoints"
+import axios from "axios"
+import { AxiosResponse } from 'axios'
+import { peliculaDTO } from './peliculas.model'
+import ListadoPeliculas from "./listadoPeliculas"
 
-function filtroPeliculas() {
+function FiltroPeliculas() {
 
     const valorInicial:  filtroPeliculasForm ={
         titulo: '',
         generoId: 0,
         proximosEstrenos: false,
-        enCines: false
+        enCines: false,
+        pagina: 1,
+        recordsPorPagina: 10
     }
 
-    const generos: generoDTO[] = [{
-        id: 1,
-        nombre: 'Accion'
-    },
-    {
-        id: 2,
-        nombre: 'Comedia'
+    const [generos, setGeneros] = useState<generoDTO[]>([]);
+    const [peliculas, setPeliculas] = useState<peliculaDTO[]>([]);
+
+    useEffect(() => {
+        axios.get(`${urlGeneros}/todos`)
+                .then((respueta: AxiosResponse<generoDTO[]>) => {
+                    setGeneros(respueta.data);
+                })
+    }, [])
+
+    useEffect(() => {
+        buscarPeliculas(valorInicial);
+    }, [])
+
+
+    function buscarPeliculas(valores: filtroPeliculasForm){
+        axios.get(`${urlPeliculas}/filtrar`, {params: valores})
+                .then((respuesta: AxiosResponse<peliculaDTO[]>) => {
+                    setPeliculas(respuesta.data);
+                })
     }
-]
 
     return ( 
         <>
             <h3>Filtro Peliculas</h3>
 
             <Formik initialValues={valorInicial}
-                    onSubmit ={valores => console.log(valores)}
+                    onSubmit ={valores => buscarPeliculas(valores)}
             >
                 {(formikProps) => (
                     <Form>
@@ -67,13 +87,19 @@ function filtroPeliculas() {
                             <Button className="btn btn-primary mb-2 mx-sm-3" onClick={() => formikProps.submitForm()}>
                                 Filtrar
                             </Button>
-                            <Button className="btn btn-danger mb-2" onClick={() => formikProps.setValues(valorInicial)}>
-                                Limpiar
+                            <Button className="btn btn-danger mb-2" 
+                                    onClick={() => {
+                                        formikProps.setValues(valorInicial);
+                                        buscarPeliculas(valorInicial);
+                                        }}
+                                >Limpiar
                             </Button>
                         </div>
                     </Form>
                 )}
             </Formik>
+
+            <ListadoPeliculas peliculas={peliculas}/>
         </>
         
      );
@@ -84,5 +110,7 @@ interface filtroPeliculasForm{
     generoId: number,
     proximosEstrenos: boolean,
     enCines: boolean;
+    pagina: number;
+    recordsPorPagina: number;
 }
-export default filtroPeliculas;
+export default FiltroPeliculas;
