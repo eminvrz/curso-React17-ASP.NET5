@@ -8,6 +8,7 @@ import { peliculaDTO } from "./peliculas.model"
 import css from './peliculasIndividual.module.css'
 import { useContext } from 'react'
 import AlertaContext from '../utils/AlertaContext'
+import Autorizado from '../auth/Autorizado'
 
 
 function PeliculaIndividual(props: peliculaIndividualProps) {
@@ -15,14 +16,14 @@ function PeliculaIndividual(props: peliculaIndividualProps) {
     const construirLink = () => `/pelicula/${props.pelicula.id}`
     const alerta = useContext(AlertaContext)
 
-    function borrarPelicula(){
+    function borrarPelicula() {
         axios.delete(`${urlPeliculas}/${props.pelicula.id}`)
             .then(() => {
-                alerta();
+                alerta()
             })
     }
 
-    return (  
+    return (
         <div className={css.div}>
             <a href={construirLink()}>
                 <img src={props.pelicula.poster} alt="Poster" />
@@ -30,19 +31,23 @@ function PeliculaIndividual(props: peliculaIndividualProps) {
             <p>
                 <a href={construirLink()}>{props.pelicula.titulo}</a>
             </p>
-            <div>
-                <Link style={{marginRight: '1rem'}}  className="btn btn-info"
-                    to={`/peliculas/editar/${props.pelicula.id}`}>Editar</Link>
-                <Button 
-                onClick={() => confirmar(() => borrarPelicula())}
-                className="btn btn-danger">Borrar</Button>
-            </div>
+            <Autorizado role="admin"
+                autorizado={
+                    <div>
+                        <Link style={{ marginRight: '1rem' }} className="btn btn-info"
+                            to={`/peliculas/editar/${props.pelicula.id}`}>Editar</Link>
+                        <Button
+                            onClick={() => confirmar(() => borrarPelicula())}
+                            className="btn btn-danger">Borrar</Button>
+                    </div>
+                }
+            />
         </div>
-    );
+    )
 }
 
-interface peliculaIndividualProps{
-    pelicula: peliculaDTO;
+interface peliculaIndividualProps {
+    pelicula: peliculaDTO
 }
 
-export default PeliculaIndividual;
+export default PeliculaIndividual

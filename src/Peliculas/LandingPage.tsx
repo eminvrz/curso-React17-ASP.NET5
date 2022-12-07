@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios"
 import { useEffect, useState } from "react"
+import Autorizado from "../auth/Autorizado"
 import AlertaContext from "../utils/AlertaContext"
 import { urlPeliculas } from '../utils/endPoints'
 import ListadoPeliculas from "./listadoPeliculas"
@@ -22,6 +23,16 @@ function LandingPage() {
 
     return (
         <>
+
+
+            <Autorizado
+                autorizado={<>Estas Autorizado</>}
+                noAutorizado={<>No estas Autorizado</>}
+                role="admin"
+            />
+
+
+
             <AlertaContext.Provider value={() => cargarDatos()}>
                 <h3>En Cartelera</h3>
                 <ListadoPeliculas peliculas={peliculas.enCines} />
