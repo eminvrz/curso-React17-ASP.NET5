@@ -7,34 +7,41 @@ import rutas from './Peliculas/router-config'
 import Menu from './utils/Menu'
 import configurarValidaciones from './validaciones'
 
-configurarValidaciones();
+configurarValidaciones()
 
 function App() {
 
-  const[claims, setClaims] = useState<claim[]>([
-    {nombre: 'email', valor:'emiliano.nvrz@gmail.com'},
-    //{nombre: 'role', valor:'admin'}
-  ]);
+  const [claims, setClaims] = useState<claim[]>([
+    { nombre: 'email', valor: 'emiliano.nvrz@gmail.com' },
+    {nombre: 'role', valor:'admin'}
+  ])
 
-  function actualizar(claims: claim[]){
-    setClaims(claims);
+  function actualizar(claims: claim[]) {
+    setClaims(claims)
+  }
+
+  function esAdmin() {
+    return claims.findIndex(claim => claim.nombre === 'role' && claim.valor === 'admin') > -1
   }
 
   return (
     <>
       <BrowserRouter>
 
-        <AutenticacionContext.Provider value={{claims, actualizar}}>
-        <Menu />
-        <div className="container">
-          <Switch>
-            //* Importando rutas, siempre se usara un map 
-            {rutas.map(ruta =>
-              <Route key={ruta.path} path={ruta.path}
-                exact={ruta.exact}><ruta.componente />
-              </Route>)}
-          </Switch>
-        </div>
+        <AutenticacionContext.Provider value={{ claims, actualizar }}>
+          <Menu />
+          <div className="container">
+            <Switch>
+            //* Importando rutas, siempre se usara un map
+              {rutas.map(ruta =>
+                <Route key={ruta.path} path={ruta.path}
+                  exact={ruta.exact}>
+                  {ruta.esAdmin && !esAdmin() ? <>
+                    No tiene permiso para acceder a este componente
+                  </> : <ruta.componente />}
+                </Route>)}
+            </Switch>
+          </div>
         </AutenticacionContext.Provider>
       </BrowserRouter>
 
