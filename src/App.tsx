@@ -12,8 +12,8 @@ configurarValidaciones()
 function App() {
 
   const [claims, setClaims] = useState<claim[]>([
-    { nombre: 'email', valor: 'emiliano.nvrz@gmail.com' },
-    {nombre: 'role', valor:'admin'}
+    // { nombre: 'email', valor: 'emiliano.nvrz@gmail.com' },
+    // {nombre: 'role', valor:'admin'}
   ])
 
   function actualizar(claims: claim[]) {

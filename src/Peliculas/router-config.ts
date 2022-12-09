@@ -14,6 +14,7 @@ import editarPeliculas from './editarPeliculas'
 import filtroPeliculas from "./filtroPeliculas"
 import LandingPage from './LandingPage'
 import Registro from '../auth/Registro'
+import Login from '../auth/Login'
 
 const rutas  = [
     {path: '/generos/crear', componente: crearGenero, esAdmin: true},
@@ -34,7 +35,8 @@ const rutas  = [
     {path: '/peliculas/editar/:id(\\d+)', componente: editarPeliculas, esAdmin: true},
     {path: '/peliculas/filtrar', componente: filtroPeliculas},
 
-    {path: '/registro', componente: Registro},
+    {path: '/registro', componente: Registro}, 
+    {path: '/login', componente: Login}, 
 
 
     {path: '/', componente: LandingPage, exact: true},
