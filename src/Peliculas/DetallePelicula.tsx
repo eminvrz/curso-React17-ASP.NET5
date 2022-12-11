@@ -2,10 +2,12 @@ import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link, useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import Cargando from '../utils/Cargando'
 import { coordenadaDTO } from '../utils/coordenadas.model'
-import { urlPeliculas } from '../utils/endPoints'
+import { urlPeliculas, urlRatings } from '../utils/endPoints'
 import Mapa from '../utils/Mapa'
+import Rating from '../utils/Rating'
 import { peliculaDTO } from './peliculas.model'
 function DetallePelicula() {
 
@@ -45,6 +47,11 @@ function DetallePelicula() {
         return [];
     }
 
+   async function onVote(voto: number){
+        await axios.post(urlRatings, {puntuacion: voto, peliculaId: id})
+            Swal.fire({icon: 'success', title: 'Voto recibido'});
+    }
+
     return ( 
         pelicula ? 
         <div style={{display: 'flex' }}>
@@ -58,6 +65,8 @@ function DetallePelicula() {
                     >{genero.nombre}  </Link>)
             }
                 | {pelicula.fechaLanzamiento.toDateString()}
+                | Tu voto: <Rating maximoValor={5} valorSeleccionado={0} 
+                    onChange={(onVote) => {}} />
 
                 <div style={{display: 'flex', marginTop: '1rem'}}>
                     <span style={{display: 'inline-block', marginRight: '1rem'}}>
