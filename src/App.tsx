@@ -5,10 +5,12 @@ import AutenticacionContext from './auth/AutenticacionContext'
 import { claim } from './auth/auth.model'
 import { obtenerClaims } from './auth/manejadorJWT'
 import rutas from './Peliculas/router-config'
+import { configurarInterceptor } from './utils/interceptores'
 import Menu from './utils/Menu'
 import configurarValidaciones from './validaciones'
 
-configurarValidaciones()
+configurarValidaciones();
+configurarInterceptor();
 
 function App() {
 

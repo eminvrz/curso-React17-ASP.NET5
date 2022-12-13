@@ -65,8 +65,10 @@ function DetallePelicula() {
                     >{genero.nombre}  </Link>)
             }
                 | {pelicula.fechaLanzamiento.toDateString()}
-                | Tu voto: <Rating maximoValor={5} valorSeleccionado={0} 
-                    onChange={(onVote) => {}} />
+                | Voto promedio: {pelicula.promedioVoto}
+                | Tu voto: 
+                    <Rating maximoValor={5} valorSeleccionado={pelicula.votoUsuario!} 
+                    onChange={onVote} />
 
                 <div style={{display: 'flex', marginTop: '1rem'}}>
                     <span style={{display: 'inline-block', marginRight: '1rem'}}>

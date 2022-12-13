@@ -10,7 +10,7 @@ function Rating(props: ratingProps) {
     const [valorSeleccionado, setValorSeleccionado] = useState(props.valorSeleccionado);
 
     useEffect(() => {
-        setMaximoValorArr(Array(props.maximoValor).fill(0))
+        setMaximoValorArr(Array(props.maximoValor).fill(0));
     }, [props.maximoValor])
 
     function manejarMouseOver(voto: number){
