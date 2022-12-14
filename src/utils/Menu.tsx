@@ -8,12 +8,12 @@ import Button from "./Button"
 function Menu() {
 
     // Nav link para impedir hacer un full refresh 
-    const claseActiva = "active";
-    const {actualizar, claims} = useContext(AutenticacionContext);
+    const claseActiva = "active"
+    const { actualizar, claims } = useContext(AutenticacionContext)
 
 
     function obtenerNombreUsuario(): string {
-        return claims.filter(x => x.nombre === "email")[0]?.valor;
+        return claims.filter(x => x.nombre === "email")[0]?.valor
     }
 
     return (
@@ -60,6 +60,13 @@ function Menu() {
                                             Crear Peliculas
                                         </NavLink>
                                     </li>
+
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" activeClassName={claseActiva}
+                                            to="/usuarios">
+                                            Usuarios
+                                        </NavLink>
+                                    </li>
                                 </>
                             }
 
@@ -71,13 +78,13 @@ function Menu() {
                     <div className="d-flex">
                         <Autorizado
                             autorizado={<>
-                            <span className="nav-link">Hola, {obtenerNombreUsuario()}</span>
-                            <Button 
-                            onClick={() => {
-                                logout();
-                                actualizar([]);
-                            }}
-                            className="nav-link btn btn-link">Log out</Button>
+                                <span className="nav-link">Hola, {obtenerNombreUsuario()}</span>
+                                <Button
+                                    onClick={() => {
+                                        logout()
+                                        actualizar([])
+                                    }}
+                                    className="nav-link btn btn-link">Log out</Button>
                             </>}
                             noAutorizado={<>
                                 <Link to="/Registro" className="nav-link btn btn-link">

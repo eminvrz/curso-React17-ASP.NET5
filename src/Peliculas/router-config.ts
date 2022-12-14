@@ -1,6 +1,8 @@
 import crearActores from '../Actores/crearActores'
 import editarActores from '../Actores/editarActores'
 import indiceActores from '../Actores/indiceActores'
+import Login from '../auth/Login'
+import Registro from '../auth/Registro'
 import crearCines from "../Cines/crearCines"
 import editarCines from "../Cines/editarCines"
 import indiceCines from "../Cines/indiceCines"
@@ -13,8 +15,8 @@ import DetallePelicula from "./DetallePelicula"
 import editarPeliculas from './editarPeliculas'
 import filtroPeliculas from "./filtroPeliculas"
 import LandingPage from './LandingPage'
-import Registro from '../auth/Registro'
-import Login from '../auth/Login'
+
+import IndiceUsuarios from '../auth/IndiceUsuarios'
 
 const rutas  = [
     {path: '/generos/crear', componente: crearGenero, esAdmin: true},
@@ -37,6 +39,7 @@ const rutas  = [
 
     {path: '/registro', componente: Registro}, 
     {path: '/login', componente: Login}, 
+    {path: '/usuarios', componente: IndiceUsuarios, esAdmin: true}, 
 
 
     {path: '/', componente: LandingPage, exact: true},
